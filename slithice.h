@@ -27,11 +27,11 @@
 #include <functional>
 
 namespace slithice {
-	using uint = unsigned int;
-	using uchar = unsigned char;
+    using uint = unsigned int;
+    using uchar = unsigned char;
 
-	// Converts a RGB32 image to Grayscale8.
-	void to_grayscale(uint* in, uchar* out);
+    // Converts a RGB32 image to Grayscale8.
+    void to_grayscale(uint* in, uchar* out);
 
     // Splits an RGB32 image in (R, G, B).
     void split_rgb(uint *in, uint *r_out, uint *g_out, uint *b_out);
