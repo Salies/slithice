@@ -1,3 +1,23 @@
+/*
+    Slithice - C++ image processing library
+    Copyright (C) 2022 Daniel Serezane
+
+    This file is part of Slithice.
+
+    Slithice is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Slithice is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Slithice.  If not, see <https://www.gnu.org/licenses/>
+ */
+
 #include "slithice.h"
 #include <random>
 #include <vector>
@@ -11,7 +31,7 @@ void slithice::to_grayscale(const QImage& in, QImage& out) {
         data_out = out.scanLine(j);
         for (int i = 0; i < in.width(); i++) {
             // Funny how the compiler doesn't complain I'm assigning an int value
-            // to an unsigned char. La garantía soy yo!
+            // to an unsigned char. La garantï¿½a soy yo!
             data_out[i] = (qRed(data_in[i]) + qGreen(data_in[i]) + qBlue(data_in[i])) / 3;
         }
     }
@@ -328,7 +348,7 @@ void slithice::rgb_to_hsl(uchar r, uchar g, uchar b, uchar* h, uchar* s, uchar* 
 	// Calcula H e S
 	else {
 		float delta = cmax - cmin;
-		// S está na escala de 0...1, converter p/ 240
+		// S estï¿½ na escala de 0...1, converter p/ 240
 		*s = std::round((delta / (1.0f - std::abs((2 * ll) - 1.0f))) * 240.f);
 		if (cmax == rr)
 			hh = ((gg - bb) / delta) + (gg < bb ? 6.0f : 0.0f);
@@ -341,7 +361,7 @@ void slithice::rgb_to_hsl(uchar r, uchar g, uchar b, uchar* h, uchar* s, uchar* 
 			hh += 360.f;
 		hh *= 60.0f;
 		// h foi dado na escala 360, converter para 240
-		// já arredonda para depois converter p/ inteiro
+		// jï¿½ arredonda para depois converter p/ inteiro
 		// lembrando que o valor nunca vai chegar a 240
 		// pois na escala de 360 ele nunca chega a 360 (0 <= H < 360)
 		hh = std::round((hh * 2.0f) / 3.0f);
