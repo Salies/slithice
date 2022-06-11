@@ -53,26 +53,36 @@ namespace slithice {
     void add_salt_pepper(const QImage& in, QImage& out);
 
     // Executes convolution on a Grayscale8 image according to param: kernel.
-    void convolution(const QImage& in, float* kernel, int kWidth, int kHeight, QImage& out);
+    void convolution(const QImage& in, float* kernel, int k_width, int kHeight, QImage& out);
     // Overloaded convolution: normalizes values by lambda function f(x).
-    void convolution(const QImage& in, float* kernel, int kWidth, int kHeight, std::function<void(int*)> f, QImage& out);
+    void convolution(const QImage& in, float* kernel, int k_width, int kHeight, std::function<void(int*)> f, QImage& out);
     // Overloaded convolution: outputs (int) values. Useful when the tone range is wide and normalization is not straightforward.
-    void convolution(const QImage& in, float* kernel, int kWidth, int kHeight, int *out, int &min, int &max);
+    void convolution(const QImage& in, float* kernel, int k_width, int kHeight, int *out);
+
+    // Applies median filtering to a Grayscale8 image.
+    void median_filter(const QImage& in, int m_width, int m_height, QImage& out);
 
     // Binarizes a Grayscale8 image.
     void binarize(const QImage& in, QImage& out);
 
+    // Sobel filtering: in is the input image, out is the normalized magnitude matrix,
+    // mag is the resultant magnitude matrix, dx is the resultant horizontal matrix, dy is the resultant vertical matrix
+    void sobel(const QImage& in, int *dx, int *dy, int *mag, QImage& out);
+
     // Applies dynamic range compression to a Grayscale8 image. Output is to be normalized.
-    void dynamic_range_compression(const QImage& in, float c, float gamma, uint* out);
+    void dynamic_range_compression(const QImage& in, float c, float gamma, QImage& out);
+
+    // Applicas thresholding to a Grayscale8 image.
+    void thresholding(const QImage& in, uchar threshold, QImage& out);
 
     // Normalizes a Grayscale8 image.
-    void normalize(const QImage& in, int max, int min, QImage& out);
+    void normalize(int *in, int max, int min, QImage& out);
 
     // Converts a RGB color to HSL (mspaint standard).
-    void rgb_to_hsl(uchar r, uchar g, uchar b, uchar& h, uchar& s, uchar& l);
+    void rgb_to_hsl(uchar r, uchar g, uchar b, uchar* h, uchar* s, uchar* l);
 
     // Converts a HSL color (mspaint standard) to RGB.
-    void hsl_to_rgb(uchar h, uchar s, uchar l, uchar& r, uchar& g, uchar& b);
+    void hsl_to_rgb(uchar h, uchar s, uchar l, uchar* r, uchar* g, uchar* b);
 } // namespace slithice
 
 #endif // SLITHICE_H
