@@ -25,47 +25,48 @@
 
 #include <vector>
 #include <functional>
+#include <QImage>
 
 namespace slithice {
     using uint = unsigned int;
     using uchar = unsigned char;
 
     // Converts a RGB32 image to Grayscale8.
-    void to_grayscale(uint* in, int w, int h, uchar* out);
+    void to_grayscale(const QImage &in, QImage &out);
 
     // Splits an RGB32 image in (R, G, B).
-    void split_rgb(uint *in, int w, int h, uint *r_out, uint *g_out, uint *b_out);
+    void split_rgb(const QImage& in, QImage& r_out, QImage& g_out, QImage& b_out);
 
     // Invert a Grayscale8 image.
-    void invert_gray(uchar* in, int w, int h, uchar* out);
+    void invert_gray(const QImage& in, QImage& out);
 
     // Invert a RGB32 image.
-    void invert(uint* in, int w, int h, uint* out);
+    void invert(const QImage& in, QImage& out);
 
     // Builds histogram for a Grayscale8 image.
-    void build_hisogram(uchar* in, int w, int h, std::vector<double> &out);
+    void build_histogram(const QImage& in, std::vector<double> &out);
 
     // Histogram equalization for a Grayscale 8 image.
-    void eq_histogram(uchar* in, int w, int h, std::vector<double>& his, uchar* out);
+    void eq_histogram(QImage& in, std::vector<double>& h);
 
     // Adds 10% of salt and pepper noise to a Grayscale8 image.
-    void add_salt_pepper(uchar* in, int w, int h, uchar* out);
+    void add_salt_pepper(const QImage& in, QImage& out);
 
     // Executes convolution on a Grayscale8 image according to param: kernel.
-    void convolution(uchar *in, int w, int h, float* kernel, int kWidth, int kHeight, uchar *out);
+    void convolution(const QImage& in, float* kernel, int kWidth, int kHeight, QImage& out);
     // Overloaded convolution: normalizes values by lambda function f(x).
-    void convolution(uchar* in, int w, int h, float* kernel, int kWidth, int kHeight, std::function<void(int*)> f, uchar* out);
+    void convolution(const QImage& in, float* kernel, int kWidth, int kHeight, std::function<void(int*)> f, QImage& out);
     // Overloaded convolution: outputs (int) values. Useful when the tone range is wide and normalization is not straightforward.
-    void convolution(uchar* in, int w, int h, float* kernel, int kWidth, int kHeight, int *out, int &min, int &max);
+    void convolution(const QImage& in, float* kernel, int kWidth, int kHeight, int *out, int &min, int &max);
 
     // Binarizes a Grayscale8 image.
-    void binarize(uchar* in, int w, int h, uchar* out);
+    void binarize(const QImage& in, QImage& out);
 
     // Applies dynamic range compression to a Grayscale8 image. Output is to be normalized.
-    void dynamic_range_compression(uchar* in, int w, int h, float c, float gamma, int* out);
+    void dynamic_range_compression(const QImage& in, float c, float gamma, uint* out);
 
     // Normalizes a Grayscale8 image.
-    void normalize(int* in, int w, int h, int max, int min, uchar* out);
+    void normalize(const QImage& in, int max, int min, QImage& out);
 
     // Converts a RGB color to HSL (mspaint standard).
     void rgb_to_hsl(uchar r, uchar g, uchar b, uchar& h, uchar& s, uchar& l);

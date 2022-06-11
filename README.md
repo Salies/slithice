@@ -1,2 +1,2 @@
 # slithice
-C++ image processing library.
+C++ image processing library for Qt.
