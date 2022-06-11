@@ -360,10 +360,7 @@ void slithice::rgb_to_hsl(uchar r, uchar g, uchar b, uchar* h, uchar* s, uchar* 
 		if (hh < 0.0f)
 			hh += 360.f;
 		hh *= 60.0f;
-		// h foi dado na escala 360, converter para 240
-		// j� arredonda para depois converter p/ inteiro
-		// lembrando que o valor nunca vai chegar a 240
-		// pois na escala de 360 ele nunca chega a 360 (0 <= H < 360)
+        // 0 <= h < 359 => 0 <= h < 239
 		hh = std::round((hh * 2.0f) / 3.0f);
 		*h = hh;
 	}
